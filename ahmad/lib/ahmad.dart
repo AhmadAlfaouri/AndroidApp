@@ -1539,7 +1539,7 @@
 //             ),
 //           ),
 //           Text(
-//             Total: ₹${items.fold(0, (sum, item) => sum + item.price)},
+//             Total:₹'${items.fold(0, (sum, item) => sum + item.price)}',
 //             style: TextStyle(fontSize: 20),
 //           ),
 //         ],

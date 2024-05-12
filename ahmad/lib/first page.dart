@@ -1,11 +1,12 @@
 import 'package:ahmad/Login.dart';
+import 'package:ahmad/Wardrobe.dart';
+import 'package:ahmad/bed.dart';
 import 'package:ahmad/order.dart';
 import 'package:ahmad/product.dart';
 import 'package:flutter/material.dart';
-
 import 'Search.dart';
-// import 'package:rating_dialog/rating_dialog.dart';
-// import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:rating_dialog/rating_dialog.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class first extends StatefulWidget {
   const first({Key? key}) : super(key: key);
@@ -15,42 +16,39 @@ class first extends StatefulWidget {
 }
 
 class _firstState extends State<first> {
-  int _currentIndex = 1;
-  
-
+  int selectedIndex = 1;
   void _onTabTapped(int index) {
     setState(() {
-      _currentIndex = index;
+      selectedIndex = index;
+      if (index == 0) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => product()));
+      } else if (index == 2) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => order()));
+      }
     });
-
-    switch (index) {
-      case 0:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => product()),
-        );
-        break;
-      case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => first()),
-        );
-        break;
-      case 2:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => order()),
-        );
-        break;
-    }
   }
 
+  List<Widget> pages = const [order(), product()];
+  String comment = "This is a comment.";
   String addedComment = '';
   String newName = '';
   String newPhoneNumber = '';
   String newaddress = '';
   String newemail = '';
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  bool isAdded = false;
+  bool isahmad = false;
+  bool isali = false;
+  bool isabd = false;
+  bool isnoor = false;
+  bool isproduct = false;
+  bool isla = false;
+  bool isomr = false;
+  bool isno = false;
+  bool isoo = false;
+  bool isww = false;
   bool showConfirmation = false;
   String enteredUsername = '';
   String enteredemail = '';
@@ -58,12 +56,6 @@ class _firstState extends State<first> {
   String enteredphonenumber = '';
   final name = '';
   final price = 0;
-
-  void _updateUI(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -336,10 +328,8 @@ class _firstState extends State<first> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => first()));
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => bed()));
                           },
                           child: Container(
                             alignment: Alignment.center,
@@ -364,16 +354,9 @@ class _firstState extends State<first> {
                     SizedBox(width: 10),
                     Column(
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => first()));
-                          },
-                          child: Container(
+                         Container(
                             alignment: Alignment.center,
-                            width: 50,
+                            width: 70,
                             height: 40,
                             decoration: BoxDecoration(
                               color: Color.fromARGB(255, 193, 111, 18),
@@ -382,13 +365,18 @@ class _firstState extends State<first> {
                                 bottomLeft: Radius.circular(10),
                               ),
                             ),
-                            child: Text(
-                              'bed',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
+                            child: TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Wardrobe()));
+                                  });
+                                },
+                                child: Text("Wardrobe"))
                             ),
-                          ),
-                        ),
+                          
                       ],
                     ),
                     SizedBox(width: 10),
@@ -624,7 +612,7 @@ class _firstState extends State<first> {
                                   double rating = 0;
                                   String comment = '';
                                   return AlertDialog(
-                                    title: Text("Product Details"),
+                                    title: Text("product Details"),
                                     content: SingleChildScrollView(
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
@@ -664,32 +652,32 @@ class _firstState extends State<first> {
                                             style: TextStyle(fontSize: 14),
                                           ),
                                           SizedBox(height: 10),
-                                          // Row(
-                                          //   mainAxisAlignment:
-                                          //       MainAxisAlignment.center,
-                                          //   children: [
-                                          //     RatingBar.builder(
-                                          //       initialRating: rating,
-                                          //       minRating: 1,
-                                          //       direction: Axis.horizontal,
-                                          //       allowHalfRating: true,
-                                          //       itemCount: 5,
-                                          //       itemSize: 30.0,
-                                          //       itemPadding:
-                                          //           EdgeInsets.symmetric(
-                                          //               horizontal: 4.0),
-                                          //       itemBuilder: (context, _) =>
-                                          //           Icon(
-                                          //         Icons.star,
-                                          //         color: Colors.amber,
-                                          //       ),
-                                          //       onRatingUpdate: (value) {
-                                          //         rating = value;
-                                          //         print(value);
-                                          //       },
-                                          //     ),
-                                          //   ],
-                                          // ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              RatingBar.builder(
+                                                initialRating: rating,
+                                                minRating: 1,
+                                                direction: Axis.horizontal,
+                                                allowHalfRating: true,
+                                                itemCount: 5,
+                                                itemSize: 30.0,
+                                                itemPadding:
+                                                    EdgeInsets.symmetric(
+                                                        horizontal: 4.0),
+                                                itemBuilder: (context, _) =>
+                                                    Icon(
+                                                  Icons.star,
+                                                  color: Colors.amber,
+                                                ),
+                                                onRatingUpdate: (value) {
+                                                  rating = value;
+                                                  print(value);
+                                                },
+                                              ),
+                                            ],
+                                          ),
                                           SizedBox(height: 10),
                                           TextField(
                                             decoration: InputDecoration(
@@ -715,8 +703,6 @@ class _firstState extends State<first> {
                                       ),
                                       TextButton(
                                         onPressed: () {
-                                          // Add the comment to the list
-                                          //...
                                           Navigator.of(context).pop();
                                         },
                                         child: Text('Add Comment'),
@@ -818,7 +804,7 @@ class _firstState extends State<first> {
                                             IconButton(
                                               onPressed: () {
                                                 setState(() {
-                                                  showConfirmation = true;
+                                                  isAdded = true;
                                                 });
                                               },
                                               icon: Icon(
@@ -826,7 +812,7 @@ class _firstState extends State<first> {
                                               color: Colors.white,
                                               iconSize: 20,
                                             ),
-                                            if (showConfirmation)
+                                            if (isAdded)
                                               Container(
                                                 decoration: BoxDecoration(
                                                   color: Colors.black
@@ -861,30 +847,88 @@ class _firstState extends State<first> {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
+                              double rating = 0;
+                              String comment = '';
                               return AlertDialog(
-                                title: Text("Product Details"),
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Image.asset('images/123456.jpg'),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "Mango",
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "5000 s.p",
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "Description: A sweet and juicy tropical fruit that is rich in vitamins and antioxidants.",
-                                      style: TextStyle(fontSize: 14),
-                                    ),
-                                  ],
+                                title: Text("product Details"),
+                                content: SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Image.asset('images/123456.jpg'),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "Mango",
+                                        style: TextStyle(fontSize: 18),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "5000 s.p",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Icon(Icons.star),
+                                              SizedBox(width: 6),
+                                              Text("3.5"),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "Description: A sweet and juicy tropical fruit that is rich in vitamins and antioxidants.",
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          RatingBar.builder(
+                                            initialRating: rating,
+                                            minRating: 1,
+                                            direction: Axis.horizontal,
+                                            allowHalfRating: true,
+                                            itemCount: 5,
+                                            itemSize: 30.0,
+                                            itemPadding: EdgeInsets.symmetric(
+                                                horizontal: 4.0),
+                                            itemBuilder: (context, _) => Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            onRatingUpdate: (value) {
+                                              rating = value;
+                                              print(value);
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10),
+                                      TextField(
+                                        decoration: InputDecoration(
+                                          labelText: "Add a comment",
+                                          border: OutlineInputBorder(),
+                                        ),
+                                        onChanged: (text) {
+                                          comment = text;
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 actions: <Widget>[
                                   TextButton(
@@ -892,6 +936,12 @@ class _firstState extends State<first> {
                                       Navigator.of(context).pop();
                                     },
                                     child: Text('Close'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('Add Comment'),
                                   ),
                                 ],
                               );
@@ -927,7 +977,7 @@ class _firstState extends State<first> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "Mango",
+                                      "bed",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 17,
@@ -987,7 +1037,7 @@ class _firstState extends State<first> {
                                         IconButton(
                                           onPressed: () {
                                             setState(() {
-                                              showConfirmation = true;
+                                              isAdded = true;
                                             });
                                           },
                                           icon:
@@ -995,7 +1045,7 @@ class _firstState extends State<first> {
                                           color: Colors.white,
                                           iconSize: 20,
                                         ),
-                                        if (showConfirmation)
+                                        if (isAdded)
                                           Container(
                                             decoration: BoxDecoration(
                                               color:
@@ -1039,30 +1089,88 @@ class _firstState extends State<first> {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
+                              double rating = 0;
+                              String comment = '';
                               return AlertDialog(
-                                title: Text("Product Details"),
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Image.asset('images/123456.jpg'),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "Mango",
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "5000 s.p",
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "Description: A sweet and juicy tropical fruit that is rich in vitamins and antioxidants.",
-                                      style: TextStyle(fontSize: 14),
-                                    ),
-                                  ],
+                                title: Text("product Details"),
+                                content: SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Image.asset('images/123456.jpg'),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "Mango",
+                                        style: TextStyle(fontSize: 18),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "5000 s.p",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Icon(Icons.star),
+                                              SizedBox(width: 6),
+                                              Text("3.5"),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "Description: A sweet and juicy tropical fruit that is rich in vitamins and antioxidants.",
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          RatingBar.builder(
+                                            initialRating: rating,
+                                            minRating: 1,
+                                            direction: Axis.horizontal,
+                                            allowHalfRating: true,
+                                            itemCount: 5,
+                                            itemSize: 30.0,
+                                            itemPadding: EdgeInsets.symmetric(
+                                                horizontal: 4.0),
+                                            itemBuilder: (context, _) => Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            onRatingUpdate: (value) {
+                                              rating = value;
+                                              print(value);
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10),
+                                      TextField(
+                                        decoration: InputDecoration(
+                                          labelText: "Add a comment",
+                                          border: OutlineInputBorder(),
+                                        ),
+                                        onChanged: (text) {
+                                          comment = text;
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 actions: <Widget>[
                                   TextButton(
@@ -1070,6 +1178,12 @@ class _firstState extends State<first> {
                                       Navigator.of(context).pop();
                                     },
                                     child: Text('Close'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('Add Comment'),
                                   ),
                                 ],
                               );
@@ -1105,7 +1219,7 @@ class _firstState extends State<first> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "Mango",
+                                      "bed",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 17,
@@ -1165,7 +1279,7 @@ class _firstState extends State<first> {
                                         IconButton(
                                           onPressed: () {
                                             setState(() {
-                                              showConfirmation = true;
+                                              isAdded = true;
                                             });
                                           },
                                           icon:
@@ -1173,7 +1287,7 @@ class _firstState extends State<first> {
                                           color: Colors.white,
                                           iconSize: 20,
                                         ),
-                                        if (showConfirmation)
+                                        if (isAdded)
                                           Container(
                                             decoration: BoxDecoration(
                                               color:
@@ -1206,30 +1320,88 @@ class _firstState extends State<first> {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
+                              double rating = 0;
+                              String comment = '';
                               return AlertDialog(
-                                title: Text("Product Details"),
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Image.asset('images/123456.jpg'),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "Mango",
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "5000 s.p",
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "Description: A sweet and juicy tropical fruit that is rich in vitamins and antioxidants.",
-                                      style: TextStyle(fontSize: 14),
-                                    ),
-                                  ],
+                                title: Text("product Details"),
+                                content: SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Image.asset('images/123456.jpg'),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "Mango",
+                                        style: TextStyle(fontSize: 18),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "5000 s.p",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Icon(Icons.star),
+                                              SizedBox(width: 6),
+                                              Text("3.5"),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "Description: A sweet and juicy tropical fruit that is rich in vitamins and antioxidants.",
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          RatingBar.builder(
+                                            initialRating: rating,
+                                            minRating: 1,
+                                            direction: Axis.horizontal,
+                                            allowHalfRating: true,
+                                            itemCount: 5,
+                                            itemSize: 30.0,
+                                            itemPadding: EdgeInsets.symmetric(
+                                                horizontal: 4.0),
+                                            itemBuilder: (context, _) => Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            onRatingUpdate: (value) {
+                                              rating = value;
+                                              print(value);
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10),
+                                      TextField(
+                                        decoration: InputDecoration(
+                                          labelText: "Add a comment",
+                                          border: OutlineInputBorder(),
+                                        ),
+                                        onChanged: (text) {
+                                          comment = text;
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 actions: <Widget>[
                                   TextButton(
@@ -1237,6 +1409,12 @@ class _firstState extends State<first> {
                                       Navigator.of(context).pop();
                                     },
                                     child: Text('Close'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('Add Comment'),
                                   ),
                                 ],
                               );
@@ -1272,7 +1450,7 @@ class _firstState extends State<first> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "Mango",
+                                      "bed",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 17,
@@ -1332,7 +1510,7 @@ class _firstState extends State<first> {
                                         IconButton(
                                           onPressed: () {
                                             setState(() {
-                                              showConfirmation = true;
+                                              isAdded = true;
                                             });
                                           },
                                           icon:
@@ -1340,7 +1518,7 @@ class _firstState extends State<first> {
                                           color: Colors.white,
                                           iconSize: 20,
                                         ),
-                                        if (showConfirmation)
+                                        if (isAdded)
                                           Container(
                                             decoration: BoxDecoration(
                                               color:
@@ -1386,30 +1564,90 @@ class _firstState extends State<first> {
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
+                                  double rating = 0;
+                                  String comment = '';
                                   return AlertDialog(
-                                    title: Text("Product Details"),
-                                    content: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Image.asset('images/123456.jpg'),
-                                        SizedBox(height: 10),
-                                        Text(
-                                          "Mango",
-                                          style: TextStyle(fontSize: 18),
-                                        ),
-                                        SizedBox(height: 10),
-                                        Text(
-                                          "5000 s.p",
-                                          style: TextStyle(fontSize: 16),
-                                        ),
-                                        SizedBox(height: 10),
-                                        Text(
-                                          "Description: A sweet and juicy tropical fruit that is rich in vitamins and antioxidants.",
-                                          style: TextStyle(fontSize: 14),
-                                        ),
-                                      ],
+                                    title: Text("product Details"),
+                                    content: SingleChildScrollView(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          Image.asset('images/123456.jpg'),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            "Mango",
+                                            style: TextStyle(fontSize: 18),
+                                          ),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            "5000 s.p",
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Icon(Icons.star),
+                                                  SizedBox(width: 6),
+                                                  Text("3.5"),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            "Description: A sweet and juicy tropical fruit that is rich in vitamins and antioxidants.",
+                                            style: TextStyle(fontSize: 14),
+                                          ),
+                                          SizedBox(height: 10),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              RatingBar.builder(
+                                                initialRating: rating,
+                                                minRating: 1,
+                                                direction: Axis.horizontal,
+                                                allowHalfRating: true,
+                                                itemCount: 5,
+                                                itemSize: 30.0,
+                                                itemPadding:
+                                                    EdgeInsets.symmetric(
+                                                        horizontal: 4.0),
+                                                itemBuilder: (context, _) =>
+                                                    Icon(
+                                                  Icons.star,
+                                                  color: Colors.amber,
+                                                ),
+                                                onRatingUpdate: (value) {
+                                                  rating = value;
+                                                  print(value);
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 10),
+                                          TextField(
+                                            decoration: InputDecoration(
+                                              labelText: "Add a comment",
+                                              border: OutlineInputBorder(),
+                                            ),
+                                            onChanged: (text) {
+                                              comment = text;
+                                            },
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                     actions: <Widget>[
                                       TextButton(
@@ -1417,6 +1655,12 @@ class _firstState extends State<first> {
                                           Navigator.of(context).pop();
                                         },
                                         child: Text('Close'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('Add Comment'),
                                       ),
                                     ],
                                   );
@@ -1453,7 +1697,7 @@ class _firstState extends State<first> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          "Mango",
+                                          "bed",
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 17,
@@ -1515,7 +1759,7 @@ class _firstState extends State<first> {
                                             IconButton(
                                               onPressed: () {
                                                 setState(() {
-                                                  showConfirmation = true;
+                                                  isAdded = true;
                                                 });
                                               },
                                               icon: Icon(
@@ -1523,7 +1767,7 @@ class _firstState extends State<first> {
                                               color: Colors.white,
                                               iconSize: 20,
                                             ),
-                                            if (showConfirmation)
+                                            if (isAdded)
                                               Container(
                                                 decoration: BoxDecoration(
                                                   color: Colors.black
@@ -1558,30 +1802,88 @@ class _firstState extends State<first> {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
+                              double rating = 0;
+                              String comment = '';
                               return AlertDialog(
-                                title: Text("Product Details"),
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Image.asset('images/123456.jpg'),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "Mango",
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "5000 s.p",
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "Description: A sweet and juicy tropical fruit that is rich in vitamins and antioxidants.",
-                                      style: TextStyle(fontSize: 14),
-                                    ),
-                                  ],
+                                title: Text("product Details"),
+                                content: SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Image.asset('images/123456.jpg'),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "Mango",
+                                        style: TextStyle(fontSize: 18),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "5000 s.p",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Icon(Icons.star),
+                                              SizedBox(width: 6),
+                                              Text("3.5"),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "Description: A sweet and juicy tropical fruit that is rich in vitamins and antioxidants.",
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          RatingBar.builder(
+                                            initialRating: rating,
+                                            minRating: 1,
+                                            direction: Axis.horizontal,
+                                            allowHalfRating: true,
+                                            itemCount: 5,
+                                            itemSize: 30.0,
+                                            itemPadding: EdgeInsets.symmetric(
+                                                horizontal: 4.0),
+                                            itemBuilder: (context, _) => Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            onRatingUpdate: (value) {
+                                              rating = value;
+                                              print(value);
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10),
+                                      TextField(
+                                        decoration: InputDecoration(
+                                          labelText: "Add a comment",
+                                          border: OutlineInputBorder(),
+                                        ),
+                                        onChanged: (text) {
+                                          comment = text;
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 actions: <Widget>[
                                   TextButton(
@@ -1589,6 +1891,12 @@ class _firstState extends State<first> {
                                       Navigator.of(context).pop();
                                     },
                                     child: Text('Close'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('Add Comment'),
                                   ),
                                 ],
                               );
@@ -1624,7 +1932,7 @@ class _firstState extends State<first> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "Mango",
+                                      "bed",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 17,
@@ -1684,7 +1992,7 @@ class _firstState extends State<first> {
                                         IconButton(
                                           onPressed: () {
                                             setState(() {
-                                              showConfirmation = true;
+                                              isAdded = true;
                                             });
                                           },
                                           icon:
@@ -1692,7 +2000,7 @@ class _firstState extends State<first> {
                                           color: Colors.white,
                                           iconSize: 20,
                                         ),
-                                        if (showConfirmation)
+                                        if (isAdded)
                                           Container(
                                             decoration: BoxDecoration(
                                               color:
@@ -1738,30 +2046,90 @@ class _firstState extends State<first> {
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
+                                  double rating = 0;
+                                  String comment = '';
                                   return AlertDialog(
-                                    title: Text("Product Details"),
-                                    content: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Image.asset('images/123456.jpg'),
-                                        SizedBox(height: 10),
-                                        Text(
-                                          "Mango",
-                                          style: TextStyle(fontSize: 18),
-                                        ),
-                                        SizedBox(height: 10),
-                                        Text(
-                                          "5000 s.p",
-                                          style: TextStyle(fontSize: 16),
-                                        ),
-                                        SizedBox(height: 10),
-                                        Text(
-                                          "Description: A sweet and juicy tropical fruit that is rich in vitamins and antioxidants.",
-                                          style: TextStyle(fontSize: 14),
-                                        ),
-                                      ],
+                                    title: Text("product Details"),
+                                    content: SingleChildScrollView(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          Image.asset('images/123456.jpg'),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            "Mango",
+                                            style: TextStyle(fontSize: 18),
+                                          ),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            "5000 s.p",
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Icon(Icons.star),
+                                                  SizedBox(width: 6),
+                                                  Text("3.5"),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            "Description: A sweet and juicy tropical fruit that is rich in vitamins and antioxidants.",
+                                            style: TextStyle(fontSize: 14),
+                                          ),
+                                          SizedBox(height: 10),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              RatingBar.builder(
+                                                initialRating: rating,
+                                                minRating: 1,
+                                                direction: Axis.horizontal,
+                                                allowHalfRating: true,
+                                                itemCount: 5,
+                                                itemSize: 30.0,
+                                                itemPadding:
+                                                    EdgeInsets.symmetric(
+                                                        horizontal: 4.0),
+                                                itemBuilder: (context, _) =>
+                                                    Icon(
+                                                  Icons.star,
+                                                  color: Colors.amber,
+                                                ),
+                                                onRatingUpdate: (value) {
+                                                  rating = value;
+                                                  print(value);
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 10),
+                                          TextField(
+                                            decoration: InputDecoration(
+                                              labelText: "Add a comment",
+                                              border: OutlineInputBorder(),
+                                            ),
+                                            onChanged: (text) {
+                                              comment = text;
+                                            },
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                     actions: <Widget>[
                                       TextButton(
@@ -1769,6 +2137,12 @@ class _firstState extends State<first> {
                                           Navigator.of(context).pop();
                                         },
                                         child: Text('Close'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('Add Comment'),
                                       ),
                                     ],
                                   );
@@ -1805,7 +2179,7 @@ class _firstState extends State<first> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          "Mango",
+                                          "bed",
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 17,
@@ -1867,7 +2241,7 @@ class _firstState extends State<first> {
                                             IconButton(
                                               onPressed: () {
                                                 setState(() {
-                                                  showConfirmation = true;
+                                                  isAdded = true;
                                                 });
                                               },
                                               icon: Icon(
@@ -1875,7 +2249,7 @@ class _firstState extends State<first> {
                                               color: Colors.white,
                                               iconSize: 20,
                                             ),
-                                            if (showConfirmation)
+                                            if (isAdded)
                                               Container(
                                                 decoration: BoxDecoration(
                                                   color: Colors.black
@@ -1910,30 +2284,88 @@ class _firstState extends State<first> {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
+                              double rating = 0;
+                              String comment = '';
                               return AlertDialog(
-                                title: Text("Product Details"),
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Image.asset('images/123456.jpg'),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "Mango",
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "5000 s.p",
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "Description: A sweet and juicy tropical fruit that is rich in vitamins and antioxidants.",
-                                      style: TextStyle(fontSize: 14),
-                                    ),
-                                  ],
+                                title: Text("product Details"),
+                                content: SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Image.asset('images/123456.jpg'),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "Mango",
+                                        style: TextStyle(fontSize: 18),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "5000 s.p",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Icon(Icons.star),
+                                              SizedBox(width: 6),
+                                              Text("3.5"),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "Description: A sweet and juicy tropical fruit that is rich in vitamins and antioxidants.",
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          RatingBar.builder(
+                                            initialRating: rating,
+                                            minRating: 1,
+                                            direction: Axis.horizontal,
+                                            allowHalfRating: true,
+                                            itemCount: 5,
+                                            itemSize: 30.0,
+                                            itemPadding: EdgeInsets.symmetric(
+                                                horizontal: 4.0),
+                                            itemBuilder: (context, _) => Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            onRatingUpdate: (value) {
+                                              rating = value;
+                                              print(value);
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10),
+                                      TextField(
+                                        decoration: InputDecoration(
+                                          labelText: "Add a comment",
+                                          border: OutlineInputBorder(),
+                                        ),
+                                        onChanged: (text) {
+                                          comment = text;
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 actions: <Widget>[
                                   TextButton(
@@ -1941,6 +2373,12 @@ class _firstState extends State<first> {
                                       Navigator.of(context).pop();
                                     },
                                     child: Text('Close'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('Add Comment'),
                                   ),
                                 ],
                               );
@@ -1976,7 +2414,7 @@ class _firstState extends State<first> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "Mango",
+                                      "bed",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 17,
@@ -2036,7 +2474,7 @@ class _firstState extends State<first> {
                                         IconButton(
                                           onPressed: () {
                                             setState(() {
-                                              showConfirmation = true;
+                                              isAdded = true;
                                             });
                                           },
                                           icon:
@@ -2044,7 +2482,7 @@ class _firstState extends State<first> {
                                           color: Colors.white,
                                           iconSize: 20,
                                         ),
-                                        if (showConfirmation)
+                                        if (isAdded)
                                           Container(
                                             decoration: BoxDecoration(
                                               color:
@@ -2090,30 +2528,90 @@ class _firstState extends State<first> {
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
+                                  double rating = 0;
+                                  String comment = '';
                                   return AlertDialog(
-                                    title: Text("Product Details"),
-                                    content: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Image.asset('images/123456.jpg'),
-                                        SizedBox(height: 10),
-                                        Text(
-                                          "Mango",
-                                          style: TextStyle(fontSize: 18),
-                                        ),
-                                        SizedBox(height: 10),
-                                        Text(
-                                          "5000 s.p",
-                                          style: TextStyle(fontSize: 16),
-                                        ),
-                                        SizedBox(height: 10),
-                                        Text(
-                                          "Description: A sweet and juicy tropical fruit that is rich in vitamins and antioxidants.",
-                                          style: TextStyle(fontSize: 14),
-                                        ),
-                                      ],
+                                    title: Text("product Details"),
+                                    content: SingleChildScrollView(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          Image.asset('images/123456.jpg'),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            "Mango",
+                                            style: TextStyle(fontSize: 18),
+                                          ),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            "5000 s.p",
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Icon(Icons.star),
+                                                  SizedBox(width: 6),
+                                                  Text("3.5"),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            "Description: A sweet and juicy tropical fruit that is rich in vitamins and antioxidants.",
+                                            style: TextStyle(fontSize: 14),
+                                          ),
+                                          SizedBox(height: 10),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              RatingBar.builder(
+                                                initialRating: rating,
+                                                minRating: 1,
+                                                direction: Axis.horizontal,
+                                                allowHalfRating: true,
+                                                itemCount: 5,
+                                                itemSize: 30.0,
+                                                itemPadding:
+                                                    EdgeInsets.symmetric(
+                                                        horizontal: 4.0),
+                                                itemBuilder: (context, _) =>
+                                                    Icon(
+                                                  Icons.star,
+                                                  color: Colors.amber,
+                                                ),
+                                                onRatingUpdate: (value) {
+                                                  rating = value;
+                                                  print(value);
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 10),
+                                          TextField(
+                                            decoration: InputDecoration(
+                                              labelText: "Add a comment",
+                                              border: OutlineInputBorder(),
+                                            ),
+                                            onChanged: (text) {
+                                              comment = text;
+                                            },
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                     actions: <Widget>[
                                       TextButton(
@@ -2121,6 +2619,12 @@ class _firstState extends State<first> {
                                           Navigator.of(context).pop();
                                         },
                                         child: Text('Close'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('Add Comment'),
                                       ),
                                     ],
                                   );
@@ -2157,7 +2661,7 @@ class _firstState extends State<first> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          "Mango",
+                                          "bed",
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 17,
@@ -2219,7 +2723,7 @@ class _firstState extends State<first> {
                                             IconButton(
                                               onPressed: () {
                                                 setState(() {
-                                                  showConfirmation = true;
+                                                  isAdded = true;
                                                 });
                                               },
                                               icon: Icon(
@@ -2227,7 +2731,7 @@ class _firstState extends State<first> {
                                               color: Colors.white,
                                               iconSize: 20,
                                             ),
-                                            if (showConfirmation)
+                                            if (isAdded)
                                               Container(
                                                 decoration: BoxDecoration(
                                                   color: Colors.black
@@ -2262,30 +2766,88 @@ class _firstState extends State<first> {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
+                              double rating = 0;
+                              String comment = '';
                               return AlertDialog(
-                                title: Text("Product Details"),
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Image.asset('images/123456.jpg'),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "Mango",
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "5000 s.p",
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "Description: A sweet and juicy tropical fruit that is rich in vitamins and antioxidants.",
-                                      style: TextStyle(fontSize: 14),
-                                    ),
-                                  ],
+                                title: Text("product Details"),
+                                content: SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Image.asset('images/123456.jpg'),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "Mango",
+                                        style: TextStyle(fontSize: 18),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "5000 s.p",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Icon(Icons.star),
+                                              SizedBox(width: 6),
+                                              Text("3.5"),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "Description: A sweet and juicy tropical fruit that is rich in vitamins and antioxidants.",
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          RatingBar.builder(
+                                            initialRating: rating,
+                                            minRating: 1,
+                                            direction: Axis.horizontal,
+                                            allowHalfRating: true,
+                                            itemCount: 5,
+                                            itemSize: 30.0,
+                                            itemPadding: EdgeInsets.symmetric(
+                                                horizontal: 4.0),
+                                            itemBuilder: (context, _) => Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            onRatingUpdate: (value) {
+                                              rating = value;
+                                              print(value);
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10),
+                                      TextField(
+                                        decoration: InputDecoration(
+                                          labelText: "Add a comment",
+                                          border: OutlineInputBorder(),
+                                        ),
+                                        onChanged: (text) {
+                                          comment = text;
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 actions: <Widget>[
                                   TextButton(
@@ -2293,6 +2855,12 @@ class _firstState extends State<first> {
                                       Navigator.of(context).pop();
                                     },
                                     child: Text('Close'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('Add Comment'),
                                   ),
                                 ],
                               );
@@ -2328,7 +2896,7 @@ class _firstState extends State<first> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "Mango",
+                                      "bed",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 17,
@@ -2388,7 +2956,7 @@ class _firstState extends State<first> {
                                         IconButton(
                                           onPressed: () {
                                             setState(() {
-                                              showConfirmation = true;
+                                              isAdded = true;
                                             });
                                           },
                                           icon:
@@ -2396,7 +2964,7 @@ class _firstState extends State<first> {
                                           color: Colors.white,
                                           iconSize: 20,
                                         ),
-                                        if (showConfirmation)
+                                        if (isAdded)
                                           Container(
                                             decoration: BoxDecoration(
                                               color:
@@ -2425,21 +2993,35 @@ class _firstState extends State<first> {
                   ),
                 ],
               ),
+            ),
+            IndexedStack(
+              children: pages,
+              index: selectedIndex,
             ),
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        showUnselectedLabels: false,
         selectedItemColor: Color.fromARGB(255, 255, 255, 255),
+        unselectedItemColor: Color.fromARGB(255, 200, 200, 200),
         backgroundColor: const Color.fromARGB(255, 193, 111, 18),
         onTap: _onTabTapped,
-        currentIndex: _currentIndex,
+        currentIndex: selectedIndex,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart_rounded), label: "Cart"),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            icon: Icon(Icons.shopping_cart_rounded),
+            label: "Cart",
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.border_outer_rounded), label: "Order"),
+            icon: Icon(Icons.home),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.border_outer_rounded),
+            label: "Order",
+          ),
         ],
       ),
     );

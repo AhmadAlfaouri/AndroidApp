@@ -1,6 +1,8 @@
 import 'package:ahmad/Login.dart';
 import 'package:ahmad/first%20page.dart';
+import 'package:ahmad/product.dart';
 import 'package:flutter/material.dart';
+
 
 class order extends StatefulWidget {
   const order({super.key});
@@ -10,7 +12,22 @@ class order extends StatefulWidget {
 }
 
 class _orderState extends State<order> {
-  
+  int selectedIndex = 2;
+  void _onTabTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+      if (index == 1) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => first()));
+      } else if (index == 0) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => product()));
+      }
+    });
+  }
+
+  List<Widget> pages = const [first(), product()];
+
   String newName = '';
   String newPhoneNumber = '';
   String newaddress = '';
@@ -20,34 +37,6 @@ class _orderState extends State<order> {
   String enteredaddress = '';
   String enteredphonenumber = '';
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  int _currentIndex = 1;
-
-  void _updateUI(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-
-    switch (index) {
-      case 0:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => order()),
-        );
-        break;
-      case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => first()),
-        );
-        break;
-      case 2:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => order()),
-        );
-        break;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +63,7 @@ class _orderState extends State<order> {
           ),
           onPressed: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => first()));
+                context, MaterialPageRoute(builder: (context) => order()));
           },
         ),
         title: TextField(
@@ -285,6 +274,10 @@ class _orderState extends State<order> {
                 ),
               ],
             ),
+            IndexedStack(
+              children: pages,
+              index: selectedIndex,
+            ),
           ],
         ),
       ),
@@ -294,16 +287,27 @@ class _orderState extends State<order> {
         color: const Color.fromARGB(255, 255, 253, 222),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        showUnselectedLabels: false,
+        selectedItemColor: Color.fromARGB(255, 255, 255, 255),
+        unselectedItemColor: Color.fromARGB(255, 200, 200, 200),
         backgroundColor: const Color.fromARGB(255, 193, 111, 18),
+        onTap: _onTabTapped,
+        currentIndex: selectedIndex,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart_rounded), label: "Cart"),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            icon: Icon(Icons.shopping_cart_rounded),
+            label: "Cart",
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.border_outer_rounded), label: "Order"),
+            icon: Icon(Icons.home),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.border_outer_rounded),
+            label: "Order",
+          ),
         ],
-        currentIndex: _currentIndex,
-        onTap: _updateUI,
       ),
     );
   }

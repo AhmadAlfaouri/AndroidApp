@@ -3,7 +3,6 @@ import 'package:ahmad/first%20page.dart';
 import 'package:flutter/material.dart';
 
 
-
 class Login extends StatefulWidget {
   const Login({Key? key});
 
@@ -74,53 +73,91 @@ class _LoginState extends State<Login> {
                         SizedBox(
                           height: 10,
                         ),
-                        TextFormField(
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter a Email';
-                            }
-                            if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                                .hasMatch(value)) {
-                              return 'Please enter a valid email';
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              filled: true,
-                              hintText: 'Email',
-                              hintStyle: TextStyle(color: Colors.white)),
-                          style: TextStyle(
-                            color: Colors.white,
+                        Container(
+                          width: 275,
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter a Email';
+                              }
+                              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                                  .hasMatch(value)) {
+                                return 'Please enter a valid email';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 20),
+                              labelText: 'Email',
+                              labelStyle: TextStyle(
+                                  color: Color.fromARGB(255, 192, 190, 190),
+                                  fontSize: 15),
+                              enabled: true,
+                              disabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                                borderSide: BorderSide(
+                                    color:
+                                        const Color.fromARGB(255, 187, 115, 14),
+                                    width: 3),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                                borderSide: BorderSide(
+                                    color:
+                                        const Color.fromARGB(255, 187, 115, 14),
+                                    width: 3),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                                borderSide: BorderSide(
+                                    color:
+                                        const Color.fromARGB(255, 187, 115, 14),
+                                    width: 3),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                                borderSide: BorderSide(
+                                    color: const Color.fromARGB(255, 255, 0, 0),
+                                    width: 3),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                                borderSide: BorderSide(
+                                    color: const Color.fromARGB(255, 255, 0, 0),
+                                    width: 3),
+                              ),
+                            ),
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                email = value;
+                              });
+                            },
                           ),
-                          onChanged: (value) {
-                            setState(() {
-                              email = value;
-                            });
-                          },
-                          
-                           
                         ),
                         SizedBox(height: 10),
-                        TextFormField(
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter a Password';
-                            }
-                            if (value.length < 6) {
-                              return 'Password should be at least 6 characters long';
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: 'Password',
+                        Container(
+                          width: 275,
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter a Password';
+                              }
+                              if (value.length < 6) {
+                                return 'Password should be at least 6 characters long';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   _isPasswordVisible
                                       ? Icons.visibility
                                       : Icons.visibility_off,
-                                  color: Colors.white,
+                                  color: Color.fromARGB(255, 192, 190, 190),
                                 ),
                                 onPressed: () {
                                   setState(() {
@@ -128,16 +165,56 @@ class _LoginState extends State<Login> {
                                   });
                                 },
                               ),
-                              hintStyle: TextStyle(color: Colors.white)),
-                          style: TextStyle(
-                            color: Colors.white,
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 20),
+                              labelText: 'Password',
+                              labelStyle: TextStyle(
+                                  color: Color.fromARGB(255, 192, 190, 190)),
+                              enabled: true,
+                              disabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                                borderSide: BorderSide(
+                                    color:
+                                        const Color.fromARGB(255, 187, 115, 14),
+                                    width: 3),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                                borderSide: BorderSide(
+                                    color:
+                                        const Color.fromARGB(255, 187, 115, 14),
+                                    width: 3),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                                borderSide: BorderSide(
+                                    color:
+                                        const Color.fromARGB(255, 187, 115, 14),
+                                    width: 3),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                                borderSide: BorderSide(
+                                    color: const Color.fromARGB(255, 255, 0, 0),
+                                    width: 3),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                                borderSide: BorderSide(
+                                    color: const Color.fromARGB(255, 255, 0, 0),
+                                    width: 3),
+                              ),
+                            ),
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                            obscureText: !_isPasswordVisible,
+                            onChanged: (value) {
+                              setState(() {
+                                password = value;
+                              });
+                            },
                           ),
-                          obscureText: !_isPasswordVisible,
-                          onChanged: (value) {
-                            setState(() {
-                              password = value;
-                            });
-                          },
                         ),
                         SizedBox(height: 10),
                         Row(
