@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/AndroidApp/static/css/main.846d3d7c.css",
+    "main.js": "/AndroidApp/static/js/main.82a279b8.js",
+    "static/media/LoginBG.jpg": "/AndroidApp/static/media/LoginBG.7ed46cd14782954dbb2c.jpg",
+    "static/media/Background.png": "/AndroidApp/static/media/Background.1687f867e8c1b85eb5a6.png",
+    "static/media/Sofa.webp": "/AndroidApp/static/media/Sofa.f3d086c6678a14336bc6.webp",
+    "index.html": "/AndroidApp/index.html",
+    "main.846d3d7c.css.map": "/AndroidApp/static/css/main.846d3d7c.css.map",
+    "main.82a279b8.js.map": "/AndroidApp/static/js/main.82a279b8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.846d3d7c.css",
+    "static/js/main.82a279b8.js"
+  ]
+}
