@@ -1,2 +1,3 @@
 # AndroidApp
-android app of AI-Powered Room Organization's
+android app of furniture application
+
